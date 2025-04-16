@@ -1,12 +1,18 @@
-// models/Reservation.js
+import { v4 as uuidv4 } from "uuid";
+
 export const Reservation = (sequelize, DataTypes) => {
   const Reservation = sequelize.define(
     "Reservation",
     {
-      user_id: DataTypes.INTEGER,
-      bus_schedule_id: DataTypes.INTEGER,
-      from_place_id: DataTypes.INTEGER,
-      to_place_id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: uuidv4,
+        primaryKey: true,
+      },
+      user_id: DataTypes.UUID,
+      bus_schedule_id: DataTypes.UUID,
+      from_place_id: DataTypes.UUID,
+      to_place_id: DataTypes.UUID,
       seat_number: DataTypes.STRING,
       status: DataTypes.ENUM("booked", "cancelled", "completed"),
       deleted_at: DataTypes.DATE,
@@ -18,5 +24,6 @@ export const Reservation = (sequelize, DataTypes) => {
       tableName: "reservations",
     }
   );
+
   return Reservation;
 };

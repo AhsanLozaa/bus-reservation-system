@@ -1,8 +1,14 @@
-// models/BusRoute.js
+import { v4 as uuidv4 } from "uuid";
+
 export const BusRoute = (sequelize, DataTypes) => {
   const BusRoute = sequelize.define(
     "BusRoute",
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: uuidv4,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       total_duration: DataTypes.STRING,
       deleted_at: DataTypes.DATE,
