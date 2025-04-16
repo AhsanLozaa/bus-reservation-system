@@ -1,4 +1,4 @@
-import { BusSchedule } from "../models/User.js";
+import { BusSchedule } from "../models/BusSchedule.js";
 import { RouteStop } from "../models/RouteStop.js";
 import { BusRoute } from "../models/BusRoute.js";
 import { Bus } from "../models/Bus.js";
