@@ -1,16 +1,12 @@
 import express from "express";
-import pool from "../config/db.js";
+import userRoutes from "./user.routes.js";
+import busRoutes from "./bus.routes.js";
+import reservationRoutes from "./reservation.routes.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT NOW() AS time");
-    res.json({ message: "Bus Reservation System API", time: rows[0].time });
-  } catch (err) {
-    console.error("DB error:", err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.use("/users", userRoutes);
+router.use("/buses", busRoutes);
+router.use("/reservations", reservationRoutes);
 
 export default router;
