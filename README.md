@@ -18,7 +18,7 @@ A Node.js-based Bus Reservation System that provides users with a platform to vi
 
 - **User Management**: Register, login, and manage user accounts.
 - **Bus Schedules**: View and manage bus schedules.
-- **Route Management**: Define and manage bus routes.
+- **Bus Route Management**: Define and manage bus routes and stops.
 - **Reservation System**: Book and manage bus seat reservations.
 - **Seat Availability**: Track seat availability for specific bus schedules.
 - **Soft Delete Support**: Deleted records are retained for audit purposes (soft delete).
@@ -45,15 +45,13 @@ Make sure you have the following installed:
 
 2. **Install dependencies**:
 
-   Run the following command to install the necessary dependencies:
-
    ```bash
    npm install
    ```
 
-3. **Create a `.env` file** in the root of the project and configure your environment variables (for database and other configurations):
+3. **Create a `.env` file** in the root of the project and configure your environment variables:
 
-   ```plaintext
+   ```env
    DB_HOST=localhost
    DB_USER=root
    DB_PASSWORD=password
@@ -64,11 +62,14 @@ Make sure you have the following installed:
 
 4. **Start the application**:
 
-   - For development (with hot-reloading):
+   - For development (with hot reloading):
+
      ```bash
      npm run dev
      ```
+
    - For production:
+
      ```bash
      npm start
      ```
@@ -80,12 +81,14 @@ Make sure you have the following installed:
 - **express**: Fast, unopinionated, minimalist web framework for Node.js.
 - **mysql2**: MySQL client for Node.js.
 - **sequelize**: Promise-based Node.js ORM for MySQL (used for database modeling).
+- **dotenv**: Loads environment variables from a `.env` file.
+- **nodemon** (dev): Automatically restarts the server on file changes.
 
 ---
 
 ## Usage
 
-After starting the application, the server will be available on the configured `PORT` (default is 5000). You can interact with the system through the exposed API endpoints.
+Once started, the server runs on the configured port (default: 5000). You can interact with the API via Postman or integrate it with a frontend.
 
 ---
 
@@ -93,38 +96,37 @@ After starting the application, the server will be available on the configured `
 
 ### User Endpoints
 
-- **POST /users/register**: Register a new user.
-- **POST /users/login**: Log in an existing user.
-- **GET /users/:id**: Get user details by ID.
+- `POST /users/register` – Register a new user.
+- `POST /users/login` – Log in an existing user.
+- `GET /users/:id` – Get user details by ID.
 
 ### Bus Endpoints
 
-- **GET /buses**: Get a list of all buses.
-- **GET /buses/:id**: Get bus details by ID.
+- `GET /buses` – Get a list of all buses.
+- `GET /buses/:id` – Get bus details by ID.
 
-### Route Endpoints
+### Bus Route Endpoints
 
-- **GET /routes**: Get a list of all bus routes.
-- **GET /routes/:id**: Get route details by ID.
+- `GET /bus-routes` – Get a list of all bus routes.
+- `GET /bus-routes/:id` – Get details of a specific route.
 
 ### Reservation Endpoints
 
-- **POST /reservations**: Create a new reservation.
-- **GET /reservations/:id**: Get reservation details by ID.
+- `POST /reservations` – Create a new reservation.
+- `GET /reservations/:id` – Get reservation details by ID.
 
 ---
 
 ## Database Structure
 
-The database consists of the following tables:
-
-- **Users**: Stores user information (id, name, email, mobile_number, password).
-- **Buses**: Stores bus information (id, name, plate_number, total_seats).
-- **Routes**: Stores route information (id, name, total_duration).
-- **Reservations**: Stores reservation details (id, user_id, bus_schedule_id, seat_number, status).
-- **BusSchedules**: Stores bus schedule information (id, bus_id, route_id, start_time, end_time).
-- **Seats**: Stores seat information (id, bus_id, seat_number, seat_type).
-- **Places**: Stores place information (id, name).
+- **Users**: id, name, email, mobile_number, password, timestamps, soft delete
+- **Places**: id, name, timestamps, soft delete
+- **Buses**: id, name, plate_number, total_seats, timestamps, soft delete
+- **Bus Routes**: id, name, total_duration, timestamps, soft delete
+- **Route Stops**: id, route_id, place_id, stop_order, stop_time, timestamps, soft delete
+- **Bus Schedules**: id, bus_id, route_id, date, start_time, end_time, timestamps, soft delete
+- **Reservations**: id, user_id, bus_schedule_id, from_place_id, to_place_id, seat_number, status, timestamps, soft delete
+- **Seats**: id, bus_id, seat_number, seat_type, timestamps, soft delete
 
 ---
 
