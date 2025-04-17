@@ -1,31 +1,3 @@
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// // import NavBar from "./components/NavBar";
-// import HomePage from "./pages/HomePage";
-// import ReservationPage from "./pages/ReservationPage";
-// import NavBar from "./pages/NavBar";
-// import LoginPage from "./pages/login";
-// // import NotFound from "./pages/NotFound"; // Uncomment if needed
-
-// function App() {
-//   return (
-//     <Router>
-//       <NavBar />
-//       <div className="max-w-6xl mx-auto px-4 mt-6">
-//         <Routes>
-//           <Route path="/" element={<HomePage />} />
-//           <Route path="/home" element={<HomePage />} />
-//           <Route path="/booking" element={<ReservationPage />} />
-//           <Route path="/login" element={<LoginPage />} />
-//           {/* <Route path="*" element={<NotFound />} /> */} {/* Optional 404 route */}
-//         </Routes>
-//       </div>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
 import React from "react";
 import ReservationPage from "./pages/ReservationPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

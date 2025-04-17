@@ -1,7 +1,31 @@
-import app from "./src/app.js";
+import express from "express";
+import dotenv from "dotenv";
+import routes from "./src/routes/index.js";
+// import { sequelize } from "../models/index.js";
+import { sequelize } from "./src/models/index.js";
 
-const PORT = process.env.PORT || 4000;
+dotenv.config();
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+const app = express();
+app.use(express.json());
+
+// Routes
+app.use("/api", routes);
+
+// Sync DB and start server
+const PORT = process.env.PORT || 3000;
+
+sequelize
+  // .sync({ alter: true }) // Use { force: true } to reset tables each time
+  .sync({ alter: false }) // Use { force: true } to reset tables each time
+  .then(() => {
+    console.log("✅ Database synced");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Failed to sync database:", err);
+  });
+
+export default app;

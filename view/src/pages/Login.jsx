@@ -1,61 +1,18 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// const LoginPage = () => {
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-//   const navigate = useNavigate(); // useNavigate hook
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     // Assume login is successful (you can replace this with an API call)
-//     if (username === 'user' && password === 'password') {
-//       navigate('/home'); // Redirect to the Home page after successful login
-//     } else {
-//       alert('Invalid login credentials');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Login</h2>
-//       <form onSubmit={handleLogin}>
-//         <input
-//           type="text"
-//           placeholder="Username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         <button type="submit">Login</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
-
-
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate(); // useNavigate hook
 
   const handleLogin = (e) => {
     e.preventDefault();
     // Assume login is successful (you can replace this with an API call)
-    if (username === 'user' && password === 'password') {
-      navigate('/home'); // Redirect to the Home page after successful login
+    if (username === "user" && password === "password") {
+      navigate("/home"); // Redirect to the Home page after successful login
     } else {
-      alert('Invalid login credentials');
+      alert("Invalid login credentials");
     }
   };
 
@@ -65,7 +22,12 @@ const LoginPage = () => {
         <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -77,7 +39,12 @@ const LoginPage = () => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Password
+            </label>
             <input
               type="password"
               id="password"
