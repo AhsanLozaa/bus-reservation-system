@@ -1,10 +1,38 @@
-import { BusSchedule } from "../models/BusSchedule.js";
-import { RouteStop } from "../models/RouteStop.js";
-import { BusRoute } from "../models/BusRoute.js";
-import { Bus } from "../models/Bus.js";
-// import { Place } from "../models/Place.js";
+import models from "../models/index.js";
+const { BusSchedule, RouteStop, BusRoute, Bus } = models;
 
 import { Op } from "sequelize";
+
+export const getAllBuses = async (req, res) => {
+  try {
+    const buses = await Bus.findAll();
+    return res.status(200).json(buses);
+  } catch (error) {
+    console.error("Get all buses error:", error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const createBus = async (req, res) => {
+  try {
+    const { name, plate_number, total_seats } = req.body;
+
+    if (!name || !plate_number || !total_seats) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newBus = await Bus.create({
+      name,
+      plate_number,
+      total_seats,
+    });
+
+    return res.status(201).json(newBus);
+  } catch (error) {
+    console.error("Create bus error:", error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
 
 export const getAvailableSchedules = async (req, res) => {
   try {

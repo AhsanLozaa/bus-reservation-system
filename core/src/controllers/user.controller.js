@@ -1,6 +1,8 @@
-import { User } from "../models/User.js";
+// import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import models from "../models/index.js";
+const { User } = models;
 
 export const registerUser = async (req, res) => {
   try {
@@ -14,6 +16,8 @@ export const registerUser = async (req, res) => {
     });
     res.status(201).json(user);
   } catch (error) {
+    console.log(error);
+
     res.status(500).json({ error: error.message });
   }
 };
@@ -27,10 +31,12 @@ export const loginUser = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
-    res.json({ token, user });
+    // const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    //   expiresIn: "1d",
+    // });
+    const token = "";
+
+    res.json({ user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

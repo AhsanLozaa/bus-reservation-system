@@ -36,5 +36,5 @@ const models = {
 
 // Define associations here if any (optional)
 
-export { sequelize };
+export { sequelize, User };
 export default models;

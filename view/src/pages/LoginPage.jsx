@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // useNavigate hook
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Assume login is successful (you can replace this with an API call)
-    if (username === "user" && password === "password") {
-      navigate("/home"); // Redirect to the Home page after successful login
-    } else {
-      alert("Invalid login credentials");
+
+    try {
+      const resposne = await login({ email: username, password: password });
+      if (resposne?.user) {
+        localStorage.setItem("user", username); // Store user info
+        setIsLoggedIn(true);
+        navigate("/home");
+      } else {
+        alert("Invalid login credentials");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
     }
+    // // Assume login is successful (you can replace this with an API call)
+    // if (username === "user" && password === "password") {
+    //   localStorage.setItem("user", username); // Store user info
+    //   setIsLoggedIn(true);
+    //   navigate("/home"); // Redirect to the Home page after successful login
+    // } else {
+    //   alert("Invalid login credentials");
+    // }
   };
 
   return (
